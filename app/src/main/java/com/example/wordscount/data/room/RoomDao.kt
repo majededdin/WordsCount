@@ -1,6 +1,9 @@
 package com.example.wordscount.data.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.wordscount.data.model.Word
 
 @Dao
@@ -13,10 +16,7 @@ interface RoomDao {
     @JvmSuppressWildcards
     suspend fun insertAllWord(words: List<Word>): List<Long>
 
-    @Update
-    suspend fun updateWord(note: Word): Int
-
-    @Delete
-    suspend fun deleteWord(note: Word): Int
+    @Query("Delete from wordTable")
+    suspend fun deleteAllWord(): Int
 
 }

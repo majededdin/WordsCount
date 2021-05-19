@@ -27,4 +27,10 @@ class WordsViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun getWordsFromRoom() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.getWordsFromRoom().collect { wordsResponse.postValue(it) }
+        }
+    }
+
 }

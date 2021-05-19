@@ -90,4 +90,11 @@ class MainActivity : BaseActivity<WordsViewModel>() {
 
     }
 
+    override fun updateViewFromLocalStorage() {
+        apiResponse.listOfWords.clear()
+        adapter.clear()
+
+        wordsVM.getWordsFromRoom()
+    }
+
 }

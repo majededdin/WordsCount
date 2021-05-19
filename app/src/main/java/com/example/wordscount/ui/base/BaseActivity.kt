@@ -20,6 +20,8 @@ import com.example.wordscount.data.model.ErrorHandler
 import com.example.wordscount.data.remote.ApiResponse
 import com.example.wordscount.data.remote.ApiStatus
 import com.example.wordscount.utils.Utils.Companion.errorResponseHandler
+import com.example.wordscount.utils.extentionUtils.toGone
+import com.example.wordscount.utils.extentionUtils.toVisible
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
@@ -27,8 +29,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.example.wordscount.utils.extentionUtils.toGone
-import com.example.wordscount.utils.extentionUtils.toVisible
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -60,6 +60,8 @@ abstract class BaseActivity<V : ViewModel> : AppCompatActivity() {
 
 
     abstract fun updateView()
+
+    abstract fun updateViewFromLocalStorage()
 
 
     protected abstract fun setErrorHandler(handler: ErrorHandler)
@@ -212,6 +214,7 @@ abstract class BaseActivity<V : ViewModel> : AppCompatActivity() {
                         ContextCompat.getColor(this, R.color.colorNetworkConnected)
                     )
 
+                    updateView()
                     CoroutineScope(Main).launch {
                         delay(2000)
                         layoutNetworkStatus.toGone()
@@ -237,6 +240,8 @@ abstract class BaseActivity<V : ViewModel> : AppCompatActivity() {
                 layoutNetworkStatus.setBackgroundColor(
                     ContextCompat.getColor(this, R.color.colorNetworkLost)
                 )
+
+                updateViewFromLocalStorage()
             }
         }
     }

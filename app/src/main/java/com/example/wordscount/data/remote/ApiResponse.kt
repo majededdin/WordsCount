@@ -33,10 +33,10 @@ class ApiResponse {
     }
 
 
-    constructor(list: ArrayList<Word>) {
+    constructor(list: List<Word>) {
         try {
             showResponse(list.toString())
-            this.listOfWords = list
+            this.listOfWords = list.toCollection(ArrayList())
         } catch (ex: Exception) {
             showResponse(ex.message)
         }
