@@ -7,7 +7,6 @@ import com.example.wordscount.data.model.Word
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -44,18 +43,14 @@ class ApiResponse {
     }
 
 
-    /**
-     * Used when there is model returned from api
-     * with specific key @param jsonKey
-     */
-   constructor(responseBodyAsString: String) {
+    constructor(responseBodyAsString: String) {
         try {
 
             responseString = responseBodyAsString
 
             val doc: Document = Jsoup.parse(responseBodyAsString)
 
-            showResponse("wwwww"+doc.text())
+            showResponse("wwwww" + doc.text())
 
             listOfWords = getListOfWordsFromHtml(doc.html())
 
@@ -174,16 +169,16 @@ class ApiResponse {
 
         val words = newResponseBody.split("\\W+".toRegex())
         val list: ArrayList<String> = words.toCollection(ArrayList())
-        val listOfWord: ArrayList<Word> = ArrayList()
+        val arrayListOfWord: ArrayList<Word> = ArrayList()
 
         for (i in 0 until list.size) {
-            if (!listOfWord.contains(Word(list[i], Collections.frequency(list, list[i]))))
-                listOfWord.add(Word(list[i], Collections.frequency(list, list[i])))
+            if (!arrayListOfWord.contains(Word(list[i], Collections.frequency(list, list[i]))))
+                arrayListOfWord.add(Word(list[i], Collections.frequency(list, list[i])))
         }
 
 
 
-        return listOfWords
+        return arrayListOfWord
     }
 
 

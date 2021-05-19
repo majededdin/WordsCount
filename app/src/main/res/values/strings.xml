@@ -13,5 +13,6 @@
     <string name="no_result">There is no result !</string>
     <string name="no_data">No data</string>
     <string name="waiting">Waiting data .....</string>
+    <string name="word_count">Word Count :</string>
 
 </resources>

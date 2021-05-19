@@ -9,8 +9,9 @@ interface RoomDao {
     @Query("select * from wordTable")
     suspend fun getAllWords(): List<Word>
 
-    @Insert
-    suspend fun insertAllWord(words: Word): Long
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @JvmSuppressWildcards
+    suspend fun insertAllWord(words: List<Word>): List<Long>
 
     @Update
     suspend fun updateWord(note: Word): Int
