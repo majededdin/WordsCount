@@ -21,8 +21,6 @@ class WordsRepo(context: Context) : BaseRepository(context) {
         roomDao!!.deleteAllWord()
         roomDao.insertAllWord(wordsResponse.listOfWords)
 
-        println("eeeeeeeeeeeee" + roomDao.getAllWords().size)
-
         emit(wordsResponse.getApiResult())
     }.catch { emit(getApiError(it)) }
 

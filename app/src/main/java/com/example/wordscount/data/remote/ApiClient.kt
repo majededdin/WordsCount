@@ -39,7 +39,6 @@ object ApiClient {
             .baseUrl(domainUrl)
             .client(okHttpClient.build())
             .addConverterFactory(ScalarsConverterFactory.create())
-//            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         return ourInstance!!
