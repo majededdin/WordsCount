@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "wordTable")
 @Parcelize
-class Word(
+open class Word(
     @ColumnInfo(name = WORD)
     var word: String,
     @ColumnInfo(name = COUNT)

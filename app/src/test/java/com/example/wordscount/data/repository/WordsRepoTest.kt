@@ -43,7 +43,7 @@ class WordsRepoTest : TestCase() {
 
     @Before
     public override fun setUp() {
-        AppConst.instance.appBaseUrl = "https://www.alalmiyalhura.com/"
+        AppConst.instance.appBaseUrl = "https://www.masrawy.com/"
 
         dataSource =
             WordsRepo(ApplicationProvider.getApplicationContext())
@@ -70,14 +70,14 @@ class WordsRepoTest : TestCase() {
 
         // Verify
         job1 = launch {
-            flow.collect {
+            flow.collect { it ->
                 this@WordsRepoTest.allOldWords = it.listOfWords.size
 
                 val flow2 = dataSource.getWordsFromRoom()
 
                 job2 = launch {
-                    flow2.collect {
-                        this@WordsRepoTest.allNewWords = it.listOfWords.size
+                    flow2.collect { it1 ->
+                        this@WordsRepoTest.allNewWords = it1.listOfWords.size
 
                         Truth.assertThat(this@WordsRepoTest.allOldWords)
                             .isEqualTo(this@WordsRepoTest.allNewWords)

@@ -50,9 +50,9 @@ class ApiResponse {
 
             val doc: Document = Jsoup.parse(responseBodyAsString)
 
-            showResponse("wwwww" + doc.text())
+            showResponse("wwwww" + doc.body().text())
 
-            listOfWords = getListOfWordsFromHtml(doc.html())
+            listOfWords = getListOfWordsFromHtml(doc.body().text())
 
 
         } catch (throwable: Throwable) {
@@ -185,13 +185,13 @@ class ApiResponse {
     //------------------------------------------ Private Constructor --------------------------------
 
 
-    private constructor(apiStatus: ApiStatus, message: String) {
+    constructor(apiStatus: ApiStatus, message: String) {
         this.apiStatus = apiStatus
         this.message = message
     }
 
 
-    private constructor(apiStatus: ApiStatus, listOfModel: ArrayList<Word>) {
+    constructor(apiStatus: ApiStatus, listOfModel: ArrayList<Word>) {
         this.apiStatus = apiStatus
         this.listOfWords = listOfModel
     }

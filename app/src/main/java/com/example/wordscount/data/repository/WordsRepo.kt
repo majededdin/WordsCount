@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
-class WordsRepo(context: Context) : BaseRepository(context) {
+open class WordsRepo(context: Context) : BaseRepository(context) {
 
     fun getWords() = flow {
         emit(ApiResponse(ApiStatus.OnLoading))

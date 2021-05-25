@@ -13,7 +13,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.CountDownLatch
 
 @RunWith(AndroidJUnit4::class) // Annotate with @RunWith
 class RoomMangerTest : TestCase() {
@@ -48,37 +47,28 @@ class RoomMangerTest : TestCase() {
     }
 
     @Test
-    fun insertAllWords() = runBlocking {
+    fun insertAllWords(): Unit = runBlocking {
         roomDao.insertAllWord(listOfWords).apply {
             Truth.assertThat(this.size).isGreaterThan(0)
         }
-
-        val latch = CountDownLatch(1)
-        latch.await()
     }
 
 
     @Test
-    fun deleteAllWords() = runBlocking {
+    fun deleteAllWords(): Unit = runBlocking {
         insertAllWords()
         roomDao.deleteAllWord().apply {
             Truth.assertThat(this).isGreaterThan(0)
         }
-
-        val latch = CountDownLatch(1)
-        latch.await()
     }
 
 
     @Test
-    fun getAllWords() = runBlocking {
+    fun getAllWords(): Unit = runBlocking {
         insertAllWords()
         roomDao.getAllWords().apply {
             Truth.assertThat(this.size).isGreaterThan(0)
             Truth.assertThat(this[0]).isEqualTo(listOfWords[0])
         }
-
-        val latch = CountDownLatch(1)
-        latch.await()
     }
 }
